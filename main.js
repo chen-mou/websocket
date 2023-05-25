@@ -1,8 +1,11 @@
 const {Server} = require("socket.io")
 const Express = require("express")
+const controller = require("controller")
 const {createServer} = require("http")
 
 const app = Express();
+
+controller(app)
 
 const httpServer = createServer(app)
 
