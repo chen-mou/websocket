@@ -1,6 +1,11 @@
-const {Server} = require("socket.io");
+const {Server} = require("socket.io"),
+    rsa = require("../rsa")
 let server
-let socketMap = {
+let userMap = {
+
+}
+
+let machineMap = {
 
 }
 
@@ -14,12 +19,23 @@ module.exports = {
             }
         });
         server.on('connect', (socket) => {
-           let machineId = socket.handshake.auth.machine_id;
-            socketMap[machineId] = socket
+            let token = socket.handshake.auth.token;
+            let {id, type} = rsa.decode(token)
+            switch (type){
+                case "machine":
+                    machineMap[id] = socket
+                    break
+                case "user":
+                    userMap[id] = socket
+                    break
+            }
         })
     },
     server: server,
-    send(machineId, method, data){
-        socketMap[machineId].emit(method, data)
+    sendMachine(machineId, method, data){
+        machineMap[machineId].emit(method, data)
+    },
+    sendUser(userId, method, data){
+        userMap[userId].emit(method, data)
     }
 }

@@ -36,7 +36,7 @@ async function come(req, res){
     if(r == null){
         throw "预约不存在或还未到达指定时间"
     }
-    socket.send(r.machine.id, "/start", {
+    socket.sendMachine(r.machine.id, "/start", {
         user_id: user.id,
         model: body.model
     })
