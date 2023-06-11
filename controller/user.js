@@ -16,7 +16,7 @@ async function login(req, res) {
     if(id == null){
         throw data.errmsg
     }
-    let r = await user.findAll({
+    let r = await user.findOne({
         where: {
             open_id: id
         },
@@ -30,7 +30,8 @@ async function login(req, res) {
     }
     res.json({
         code: 0,
-        data: jwt.encode({
+        data: r,
+        token: jwt.encode({
             id: r.id
         })
     });

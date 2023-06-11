@@ -20,6 +20,8 @@
     "moment": "^2.29.4",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.3.2",
+    "node-rsa": "^1.1.1",
+    "nodemailer": "^6.9.3",
     "sequelize": "^6.31.1",
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1"

@@ -10,7 +10,7 @@ const reserve = sequelize.define("Reserve", {
         primaryKey: true
     },
     date: {
-        type: DataTypes.DATE
+        type: DataTypes.DATEONLY
     },
     start: {
       type: DataTypes.TIME
@@ -19,6 +19,9 @@ const reserve = sequelize.define("Reserve", {
         type: DataTypes.TIME
     },
     status: {
+        type: DataTypes.STRING
+    },
+    file: {
         type: DataTypes.STRING
     }
 },{

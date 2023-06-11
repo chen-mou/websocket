@@ -16,7 +16,13 @@ const machine = sequelize.define('Machine', {
     longitude: {
         type: DataTypes.DOUBLE
     },
+    address: {
+        type: DataTypes.STRING
+    },
     status: {
+        type: DataTypes.STRING
+    },
+    ip: {
         type: DataTypes.STRING
     }
 },{

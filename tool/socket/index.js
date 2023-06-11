@@ -20,22 +20,34 @@ module.exports = {
         });
         server.on('connect', (socket) => {
             let token = socket.handshake.auth.token;
-            let {id, type} = rsa.decode(token)
-            switch (type){
-                case "machine":
-                    machineMap[id] = socket
-                    break
-                case "user":
-                    userMap[id] = socket
-                    break
+            try {
+                let text = rsa.decode(token)
+                console.log(text)
+                let {id, type} = JSON.parse(text)
+                switch (type) {
+                    case "machine":
+                        machineMap[id] = socket
+                        break
+                    case "user":
+                        userMap[id] = socket
+                        break
+                }
+            }catch (e){
+                console.log(e)
             }
         })
     },
     server: server,
     sendMachine(machineId, method, data){
+        if(machineMap[machineId] == null){
+            return;
+        }
         machineMap[machineId].emit(method, data)
     },
     sendUser(userId, method, data){
+        if(machineMap[userId] == null){
+            return;
+        }
         userMap[userId].emit(method, data)
     }
 }
