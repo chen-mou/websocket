@@ -55,7 +55,7 @@ const fsExistSync = (path) => {
 const get = async (req, res) => {
     const userId = req.user.id,
         name = req.params.name
-    res.sendFile(`E:\\Code\\nodejs\\websocket\\img\\${userId}\\${name}`)
+    res.sendFile(`${basePath}\\${userId}\\${name}`)
 }
 
 module.exports = (app) => {
